@@ -17,6 +17,7 @@ class CreateMahasiswasTable extends Migration
             $table->id();
             $table->string('user_id')->unique();
 
+            $table->string('foto')->nullable();
             $table->string('nama')->nullable();
             $table->char('nik', 16)->nullable();
             $table->string('alamat')->nullable();
@@ -36,7 +37,8 @@ class CreateMahasiswasTable extends Migration
             $table->string('ukt')->nullable();
             $table->string('pekerjaan_ortu')->nullable();
             $table->string('prestasi')->default(0)->nullable();
-
+            
+            $table->string('status')->default("Menunggu")->nullable();
 
             $table->timestamps();
         });

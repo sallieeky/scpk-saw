@@ -88,7 +88,8 @@
       <!-- Page Sidebar Start-->
       <header class="main-nav">
         @if(Auth::user()->mahasiswa)
-        <div class="sidebar-user text-center"><a class="setting-primary" href="/profile"><i data-feather="settings"></i></a>
+        <div class="sidebar-user text-center">
+          @if(!Auth::user()->role == "admin")<a class="setting-primary" href="/profile"><i data-feather="settings"></i></a>@endif
           <div id="profileImage" class="d-flex align-items-center justify-content-center m-auto"></div>
           <a href="#">
             <h6 class="mt-3 f-14 f-w-600">{{ Auth::user()->mahasiswa->nama }}</h6>
@@ -109,11 +110,22 @@
                   </div>
                 </li>
                 <li class="dropdown"><a class="nav-link menu-title link-nav" href="{{ url("/") }}"><i data-feather="home"></i><span>Dashboard</span></a></li>
+                @if(Auth::user()->role == "user")
                 <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="user"></i><span>Data Diri</span></a>
                   <ul class="nav-submenu menu-content">
                     <li><a href="/profile">Profile</a></li>
                   </ul>
                 </li>
+                @else
+                <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="user"></i><span>Halaman Admin</span></a>
+                  <ul class="nav-submenu menu-content">
+                    <li><a href="/cek-pendaftar">Cek Pendaftar</a></li>
+                  </ul>
+                  <ul class="nav-submenu menu-content">
+                    <li><a href="/urutan-pendaftar">Urutan Pendaftar</a></li>
+                  </ul>
+                </li>
+                @endif
               </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

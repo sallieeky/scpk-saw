@@ -27,22 +27,54 @@ class DashboardController extends Controller
         $data = array_slice($this->rankSaw(), 0, 10);
         $authSaw = $this->authSaw();
 
+        $belumDiverifikasi = Mahasiswa::where([["status", "Menunggu"], ["user_id", "!=", "1"]])->count();
+
+        return view("dashboard.home", compact("user", "mahasiswa", "data", "authSaw", "belumDiverifikasi"));
         
-        // return $data;
-        return view("dashboard.home", compact("user", "mahasiswa", "data", "authSaw"));
     }
 
     public function profile()
     {
         return view("dashboard.profile");
     }
+    public function gantiGambar(Request $request)
+    {
+        Mahasiswa::find(Auth::user()->id)
+            ->update([
+                "foto" => $request->file("foto")->getClientOriginalName()
+            ]);
+        $request->file("foto")->storeAs("public/foto", $request->file("foto")->getClientOriginalName());
+        return back();
+    }
 
+    public function cekPendaftar()
+    {
+        $pendaftarBelumVerifikasi = Mahasiswa::where([["status", "Menunggu"], ['user_id', "!=", "1"]])->get();
+        return view("dashboard.cek-pendaftar", compact("pendaftarBelumVerifikasi"));
+    }
+    public function verifikasi(Mahasiswa $mahasiswa)
+    {
+        $mahasiswa->update([
+            "status" => "Diverifikasi"
+        ]);
+        return back();
+    }
+    public function profileMahasiswa(Mahasiswa $mahasiswa)
+    {
+        return view("dashboard.profile-mahasiswa", compact("mahasiswa"));
+    }
+    
+    public function urutanPendaftar()
+    {
+        $pendaftar = $this->rankSaw();
+        return view("dashboard.urutan-pendaftar", compact("pendaftar"));
+    }
 
 
 
     public function sawCount()
     {
-        $mahasiswa = Mahasiswa::where("user_id", "!=", "1")->get();
+        $mahasiswa = Mahasiswa::where([["user_id", "!=", "1"], ["status", "Diverifikasi"]])->get();
         $bobot_kriteria = [
             "akre_ptn" => 0.25,
             "akre_prodi" => 0.5,
@@ -258,14 +290,6 @@ class DashboardController extends Controller
                 "nilai" => round(($w1r1 + $w2r2 + $w3r3 + $w4r4 + $w5r5 + $w6r6), 3)
             ];
         }
-
-        $data = [
-            "nama" => $nama,
-            "kriteria" => $kriteria,
-            "fuzzy_kriteria" => $fuzzy_kriteria,
-            "normalisasi_fuzzy" => $normalisasi_fuzzy,
-            "nilai_preferensi" => $nilai_preferensi,
-        ];
         return $nilai_preferensi;
     }
 

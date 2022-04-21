@@ -33,6 +33,15 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(["mahasiswa"])->group(function () {
         Route::get('/', [DashboardController::class, 'index']);
         Route::get('/profile', [DashboardController::class, 'profile']);
+        Route::post('/ganti-gambar', [DashboardController::class, 'gantiGambar']);
+
+        Route::middleware(['admin'])->group(function () {
+            Route::get('/cek-pendaftar', [DashboardController::class, 'cekPendaftar']);
+            Route::get('/verifikasi/{mahasiswa}', [DashboardController::class, 'verifikasi']);
+            Route::get('/profile/{mahasiswa}', [DashboardController::class, 'profileMahasiswa']);
+            
+            Route::get('/urutan-pendaftar', [DashboardController::class, 'urutanPendaftar']);
+        });
     });
     
     Route::get('/logout', [AuthController::class, 'logout']);

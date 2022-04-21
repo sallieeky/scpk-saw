@@ -23,23 +23,16 @@
             <div class="row mb-2">
               <div class="profile-title">
                 <div class="media">
-                  <form action="/ganti-gambar" enctype="multipart/form-data" method="POST">
-                    @csrf
-                    <label for="ganti-gambar" style="cursor: pointer">
-                      @if(!Auth::user()->mahasiswa->foto)
-                        <img class="img-70 rounded-circle" style="width: 100px; height:70px; object-fit: cover" id="gambar-preview" src="/template/assets/images/user/7.jpg">
-                      @else
-                        <img class="img-70 rounded-circle" style="width: 100px; height:70px; object-fit: cover" id="gambar-preview" src="/storage/foto/{{ Auth::user()->mahasiswa->foto }}">
-                      @endif
-                      </label>
-                    <input type="file" name="foto" style="display: none" id="ganti-gambar">
-                    <button style="display: none" type="submit" ></button>
-                  </form>
+                  @if(!$mahasiswa->foto)
+                    <img class="img-70 rounded-circle" style="width: 100px; height:70px; object-fit: cover" id="gambar-preview" src="/template/assets/images/user/7.jpg">
+                  @else
+                    <img class="img-70 rounded-circle" style="width: 100px; height:70px; object-fit: cover" id="gambar-preview" src="/storage/foto/{{ $mahasiswa->foto }}">
+                  @endif
                   <div class="media-body">
-                    <h3 class="mb-1 f-20 txt-primary">{{ Auth::user()->mahasiswa->nama }}</h3>
+                    <h3 class="mb-1 f-20 txt-primary">{{ $mahasiswa->nama }}</h3>
                     <p class="f-12">Mahasiswa</p>
                   </div>
-                  <span class="badge rounded-pill px-3" style="background-color: #44ff00">Online</span>
+                  <a href="/cek-pendaftar"><span class="badge rounded-pill px-3 py-2 bg-success"><i data-feather="chevrons-left"></i> Kembali</span></a>
                 </div>
               </div>
             </div>
@@ -48,76 +41,76 @@
                 <form>
                   <div class="mb-3">
                     <label class="form-label"><strong>Email Address</strong></label>
-                    <p>{{ Auth::user()->email }}</p>
+                    <p>{{ $mahasiswa->user->email }}</p>
                   </div>
                   <div class="mb-3">
                     <label class="form-label"><strong>NIK</strong></label>
-                    <p>{{ Auth::user()->mahasiswa->nik }}</p>
+                    <p>{{ $mahasiswa->nik }}</p>
                   </div>
                   <div class="mb-3">
                     <label class="form-label"><strong>Alamat</strong></label>
-                    <p>{{ Auth::user()->mahasiswa->alamat }}</p>
+                    <p>{{ $mahasiswa->alamat }}</p>
                   </div>
                   <div class="mb-3">
                     <label class="form-label"><strong>Nomor Telepon</strong></label>
-                    <p>{{ Auth::user()->mahasiswa->no_telp }}</p>
+                    <p>{{ $mahasiswa->no_telp }}</p>
                   </div>
                   <div class="mb-3">
                     <label class="form-label"><strong>Tempat Lahir</strong></label>
-                    <p>{{ Auth::user()->mahasiswa->tempat_lahir }}</p>
+                    <p>{{ $mahasiswa->tempat_lahir }}</p>
                   </div>
                   <div class="mb-3">
                     <label class="form-label"><strong>Tanggal Lahir</strong></label>
-                    <p>{{ date("d M Y", strtotime(Auth::user()->mahasiswa->tanggal_lahir)) }}</p>
+                    <p>{{ date("d M Y", strtotime($mahasiswa->tanggal_lahir)) }}</p>
                   </div>
                 </form>
               </div>
               <div class="col-md-4">
                 <div class="mb-3">
                   <label class="form-label"><strong>NIM</strong></label>
-                  <p>{{ Auth::user()->mahasiswa->nim }}</p>
+                  <p>{{ $mahasiswa->nim }}</p>
                 </div>
                 <div class="mb-3">
                   <label class="form-label"><strong>Strata</strong></label>
-                  <p>{{ Auth::user()->mahasiswa->strata }}</p>
+                  <p>{{ $mahasiswa->strata }}</p>
                 </div>
                 <div class="mb-3">
                   <label class="form-label"><strong>Jenis Perguruan Tinggi</strong></label>
-                  <p>{{ Auth::user()->mahasiswa->jenis_ptn }}</p>
+                  <p>{{ $mahasiswa->jenis_ptn }}</p>
                 </div>
                 <div class="mb-3">
                   <label class="form-label"><strong>Perguruan Tinggi</strong></label>
-                  <p>{{ Auth::user()->mahasiswa->ptn }}</p>
+                  <p>{{ $mahasiswa->ptn }}</p>
                 </div>
                 <div class="mb-3">
                   <label class="form-label"><strong>Program Studi</strong></label>
-                  <p>{{ Auth::user()->mahasiswa->prodi }}</p>
+                  <p>{{ $mahasiswa->prodi }}</p>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="mb-3">
                   <label class="form-label"><strong>Akreditasi Perguruan Tinggi</strong></label>
-                  <p>{{ Auth::user()->mahasiswa->akre_ptn }}</p>
+                  <p>{{ $mahasiswa->akre_ptn }}</p>
                 </div>
                 <div class="mb-3">
                   <label class="form-label"><strong>Akreditasi Program Studi</strong></label>
-                  <p>{{ Auth::user()->mahasiswa->akre_prodi }}</p>
+                  <p>{{ $mahasiswa->akre_prodi }}</p>
                 </div>
                 <div class="mb-3">
                   <label class="form-label"><strong>IPK</strong></label>
-                  <p>{{ Auth::user()->mahasiswa->ipk }}</p>
+                  <p>{{ $mahasiswa->ipk }}</p>
                 </div>
                 <div class="mb-3">
                   <label class="form-label"><strong>UKT</strong></label>
-                  <p>Rp. {{ number_format(Auth::user()->mahasiswa->ukt,2,",",".") }}</p>
+                  <p>Rp. {{ number_format($mahasiswa->ukt,2,",",".") }}</p>
                 </div>
                 <div class="mb-3">
                   <label class="form-label"><strong>Pekerjaan Orang Tua/Wali</strong></label>
-                  <p>{{ Auth::user()->mahasiswa->pekerjaan_ortu }}</p>
+                  <p>{{ $mahasiswa->pekerjaan_ortu }}</p>
                 </div>
                 <div class="mb-3">
                   <label class="form-label"><strong>Prestasi</strong></label>
-                  <p>{{ Auth::user()->mahasiswa->prestasi }}</p>
+                  <p>{{ $mahasiswa->prestasi }}</p>
                 </div>
               </div>
             </div>
@@ -130,25 +123,4 @@
   </div>
 </div>
 <!-- Container-fluid Ends-->
-@endsection
-
-@section("script")
-<script>
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      
-      reader.onload = function(e) {
-        $('#gambar-preview').attr('src', e.target.result);
-      }
-      
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-  
-  $("#ganti-gambar").change(function() {
-    readURL(this);
-    $(this).parent().submit();
-  });
-</script>
 @endsection

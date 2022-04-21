@@ -32,7 +32,7 @@
         <div class="card o-hidden border-0">
           <div class="bg-primary b-r-4 card-body">
             <div class="media static-top-widget">
-              <div class="align-self-center text-center"><i data-feather="database"></i></div>
+              <div class="align-self-center text-center"><i data-feather="user"></i></div>
               <div class="media-body"><span class="m-0">Total User</span>
                 <h4 class="mb-0 counter">{{ $user }}</h4><i class="icon-bg" data-feather="user"></i>
               </div>
@@ -44,7 +44,7 @@
         <div class="card o-hidden border-0">
           <div class="bg-warning b-r-4 card-body">
             <div class="media static-top-widget">
-              <div class="align-self-center text-center"><i data-feather="database"></i></div>
+              <div class="align-self-center text-center"><i data-feather="check-square"></i></div>
               <div class="media-body"><span class="m-0">Total Pendaftar</span>
                 <h4 class="mb-0 counter">{{ $mahasiswa }}</h4><i class="icon-bg" data-feather="check-square"></i>
               </div>
@@ -52,18 +52,33 @@
           </div>
         </div>
       </div>
+      @if (Auth::user()->role == 'user')
       <div class="col-sm-6 col-xl-4 col-lg-6">
         <div class="card o-hidden border-0">
           <div class="bg-info b-r-4 card-body">
             <div class="media static-top-widget">
-              <div class="align-self-center text-center"><i data-feather="database"></i></div>
-              <div class="media-body"><span class="m-0">Nilai Anda Saat Ini</span>
-                <h4 class="mb-0 counter">{{ $authSaw["nilai"] }}</h4><i class="icon-bg" data-feather="info"></i>
+              <div class="align-self-center text-center"><i data-feather="info"></i></div>
+              <div class="media-body"><span class="m-0">Status</span>
+                <h4 class="mb-0 counter">{{ Auth::user()->mahasiswa->status }}</h4><i class="icon-bg" data-feather="info"></i>
               </div>
             </div>
           </div>
         </div>
       </div>
+      @else
+      <div class="col-sm-6 col-xl-4 col-lg-6">
+        <div class="card o-hidden border-0">
+          <div class="bg-info b-r-4 card-body">
+            <div class="media static-top-widget">
+              <div class="align-self-center text-center"><i data-feather="info"></i></div>
+              <div class="media-body"><span class="m-0">Belum Diverifikasi</span>
+                <h4 class="mb-0 counter">{{ $belumDiverifikasi }}</h4><i class="icon-bg" data-feather="info"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      @endif
 
     </div>
   </div>
@@ -114,7 +129,6 @@
                     <th>Jenis Perguruan Tinggi</th>
                     <th>Perguruan Tinggi</th>
                     <th>Program Studi</th>
-                    <th>Nilai</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -126,7 +140,6 @@
                       <td>{{ $dt["mahasiswa"]->jenis_ptn }}</td>
                       <td>{{ $dt["mahasiswa"]->ptn }}</td>
                       <td>{{ $dt["mahasiswa"]->prodi }}</td>
-                      <td>{{ $dt["nilai"] }}</td>
                     </tr>
                   @endforeach
                 </tbody>
