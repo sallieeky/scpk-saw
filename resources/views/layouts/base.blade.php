@@ -10,8 +10,8 @@
   <meta name="keywords" content="admin template, viho admin template, dashboard template, flat admin template, responsive admin template, web app">
   <meta name="author" content="pixelstrap">
 
-  <link rel="icon" href="/template/assets/images/logo/logo-mantau.png" type="image/x-icon">
-  <link rel="shortcut icon" href="/template/assets/images/logo/logo-mantau.png" type="image/x-icon">
+  <link rel="icon" href="/logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="/logo.png" type="image/x-icon">
   <title>Beasiswa Balikpapan Tuntas</title>
   <!-- Google font-->
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -89,7 +89,6 @@
       <header class="main-nav">
         @if(Auth::user()->mahasiswa)
         <div class="sidebar-user text-center">
-          @if(!Auth::user()->role == "admin")<a class="setting-primary" href="/profile"><i data-feather="settings"></i></a>@endif
           <div id="profileImage" class="d-flex align-items-center justify-content-center m-auto"></div>
           <a href="#">
             <h6 class="mt-3 f-14 f-w-600">{{ Auth::user()->mahasiswa->nama }}</h6>
@@ -120,8 +119,6 @@
                 <li class="dropdown"><a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="user"></i><span>Halaman Admin</span></a>
                   <ul class="nav-submenu menu-content">
                     <li><a href="/cek-pendaftar">Cek Pendaftar</a></li>
-                  </ul>
-                  <ul class="nav-submenu menu-content">
                     <li><a href="/urutan-pendaftar">Urutan Pendaftar</a></li>
                   </ul>
                 </li>

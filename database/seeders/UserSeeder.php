@@ -104,30 +104,13 @@ class UserSeeder extends Seeder
             'role' => 'user',
             'password' => bcrypt('eky12345'),
         ]);
-        User::create([
-            'email' => 'user16@gmail.com',
-            'role' => 'user',
-            'password' => bcrypt('eky12345'),
-        ]);
-        User::create([
-            'email' => 'user17@gmail.com',
-            'role' => 'user',
-            'password' => bcrypt('eky12345'),
-        ]);
-        User::create([
-            'email' => 'user18@gmail.com',
-            'role' => 'user',
-            'password' => bcrypt('eky12345'),
-        ]);
-        User::create([
-            'email' => 'user19@gmail.com',
-            'role' => 'user',
-            'password' => bcrypt('eky12345'),
-        ]);
-        User::create([
-            'email' => 'user20@gmail.com',
-            'role' => 'user',
-            'password' => bcrypt('eky12345'),
-        ]);
+
+        for($i=16; $i<=500; $i++){
+            User::create([
+                'email' => 'user' . $i . '@gmail.com',
+                'role' => 'user',
+                'password' => bcrypt('eky12345')
+            ]);
+        }
     }
 }

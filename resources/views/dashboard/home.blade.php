@@ -115,7 +115,7 @@
       <div class="col-sm-12">
         <div class="card">
           <div class="card-header pb-0">
-            <h5>Pantau 10 Teratas</h5><span>ranking penerima beasiswa balikpapan tuntas</span>
+            <h5>Pantau 10 Teratas</h5><span>ranking sementara penerima beasiswa balikpapan tuntas  yang pasti lulus</span>
           </div>
           <div class="card-body">
 
@@ -129,6 +129,7 @@
                     <th>Jenis Perguruan Tinggi</th>
                     <th>Perguruan Tinggi</th>
                     <th>Program Studi</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -140,6 +141,7 @@
                       <td>{{ $dt["mahasiswa"]->jenis_ptn }}</td>
                       <td>{{ $dt["mahasiswa"]->ptn }}</td>
                       <td>{{ $dt["mahasiswa"]->prodi }}</td>
+                      <td class="bg-success text-center">Lulus</td>
                     </tr>
                   @endforeach
                 </tbody>

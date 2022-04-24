@@ -22,8 +22,8 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $user = User::all()->count();
-        $mahasiswa = Mahasiswa::all()->count();
+        $user = User::where("id", "!=", "1")->get()->count();
+        $mahasiswa = Mahasiswa::where("user_id", "!=", "1")->get()->count();
         $data = array_slice($this->rankSaw(), 0, 10);
         $authSaw = $this->authSaw();
 
@@ -39,7 +39,7 @@ class DashboardController extends Controller
     }
     public function gantiGambar(Request $request)
     {
-        Mahasiswa::find(Auth::user()->id)
+        Mahasiswa::where("user_id", Auth::user()->id)
             ->update([
                 "foto" => $request->file("foto")->getClientOriginalName()
             ]);
@@ -50,7 +50,8 @@ class DashboardController extends Controller
     public function cekPendaftar()
     {
         $pendaftarBelumVerifikasi = Mahasiswa::where([["status", "Menunggu"], ['user_id', "!=", "1"]])->get();
-        return view("dashboard.cek-pendaftar", compact("pendaftarBelumVerifikasi"));
+        $jumlah = $pendaftarBelumVerifikasi->count();
+        return view("dashboard.cek-pendaftar", compact("pendaftarBelumVerifikasi", "jumlah"));
     }
     public function verifikasi(Mahasiswa $mahasiswa)
     {
@@ -74,7 +75,7 @@ class DashboardController extends Controller
 
     public function sawCount()
     {
-        $mahasiswa = Mahasiswa::where([["user_id", "!=", "1"], ["status", "Diverifikasi"]])->get();
+        $mahasiswa = Mahasiswa::where([["user_id", "!=", "1"], ["status", "!=", "Menunggu"]])->get();
         $bobot_kriteria = [
             "akre_ptn" => 0.25,
             "akre_prodi" => 0.5,

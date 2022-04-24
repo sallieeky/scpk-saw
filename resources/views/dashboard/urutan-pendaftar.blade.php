@@ -23,6 +23,7 @@
                   <th>Program Studi</th>
                   <th>Lihat Profile</th>
                   <th>Nilai</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -36,6 +37,7 @@
                   <td>{{ $pd["mahasiswa"]->prodi }}</td>
                   <td><a href="/profile/{{ $pd["mahasiswa"]->id }}" target="_blank" class="btn btn-link btn-sm">Lihat Profile</a></td>
                   <td>{{ $pd["nilai"] }}</td>
+                  <td class="text-center @if($pd["mahasiswa"]->status == "Lulus") bg-success @elseif($pd["mahasiswa"]->status == "Tidak Lulus") bg-danger @elseif($pd["mahasiswa"]->status == "Diverifikasi") bg-warning @endif"><strong>{{ $pd["mahasiswa"]->status }}</strong></td>
                 </tr>
               @endforeach
               </tbody>

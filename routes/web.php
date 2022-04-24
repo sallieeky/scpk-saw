@@ -49,6 +49,11 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get("/migrate", function() {
     Artisan::call("migrate:fresh --seed");
+    return back();
+});
+Route::get("/storage", function() {
+    Artisan::call("storage:link");
+    return back();
 });
 
 

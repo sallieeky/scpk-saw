@@ -9,6 +9,7 @@
         <div class="card-header">
           <h5>Data Pendaftar Beasiswa Balikpapan Tuntas</h5>
           <span>Berikut ini adalah daftar mahasiswa yang melakukan pendaftaran pada beasiswa balikpapan tuntas. Silakan verifikasi pendaftar terlebih dahulu agar sistem akan mencatat nilai yang diperoleh oleh pendaftar.</span>
+          <p class="mt-3">Jumlah yang belum di verifikasi : <span class="badge badge-pill bg-warning px-4 py-2">{{ $jumlah }}</span></p>
         </div>
         <div class="card-body">
           <div class="table-responsive">
