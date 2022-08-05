@@ -12,6 +12,7 @@ class DashboardController extends Controller
 
     public function insertDataProfile()
     {
+        $tes = "awd;";
         return view("dashboard.insert-data-profile");
     }
     public function insertDataProfilePost(Request $request)
